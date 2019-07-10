@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class NumberGenerator : MonoBehaviour{
 
+    public Gameplay gameplay;
+
     public GameObject[] numbers;
 
-    public float minTime = 2f;
-    public float maxTime = 6f;
+    private float minTime = 5f;
+    private float maxTime = 15f;
 
     void Start(){
 
@@ -17,11 +19,17 @@ public class NumberGenerator : MonoBehaviour{
 
     void instantiateNumber() {
 
-        int numero = Random.Range(0, numbers.Length);
+        int number = Random.Range(0, numbers.Length);
 
-        Instantiate(numbers[numero], transform.position, Quaternion.identity);
+        Instantiate(numbers[number], transform.position, Quaternion.identity);
+
+        gameplay.addNumbersToList(number+1);
 
         Invoke("instantiateNumber", Random.Range(minTime, maxTime));
+    }
+
+    public void stopNumberGenerator() {
+        CancelInvoke();
     }
 
 

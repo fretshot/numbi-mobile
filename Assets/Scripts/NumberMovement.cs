@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NumberMovement : MonoBehaviour{
 
-    public float speed = 5f;
+    private float speed = 4f;
 
     void Update() {
         transform.Translate(Vector2.down * speed * Time.deltaTime);

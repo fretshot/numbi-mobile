@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -28,6 +29,9 @@ public class Gameplay : MonoBehaviour{
     private int maxScore = 0;
 
     public Text textActualScore;
+
+    public TextMeshProUGUI txtYourScore;
+    public TextMeshProUGUI txtMaxScore;
 
     public GameObject canvasMain;
     public GameObject canvasLose;
@@ -163,11 +167,11 @@ public class Gameplay : MonoBehaviour{
         });
 
         buttonPlayAgain.onClick.AddListener(delegate {
-            SceneManager.LoadScene("00");
+            SceneManager.LoadScene("01");
         });
 
         buttonMainMenu.onClick.AddListener(delegate {
-            //loadScene
+            SceneManager.LoadScene("00");
         });
 
 
@@ -184,6 +188,13 @@ public class Gameplay : MonoBehaviour{
         foreach (NumberGenerator i in numberGenerator) {
             i.stopNumberGenerator();
         }
+
+        if (actualScore >= maxScore) {
+            PlayerPrefs.SetInt("maxScore",actualScore);
+        }
+
+        txtYourScore.text = "Your Score: "+actualScore.ToString();
+        txtMaxScore.text = "Max Score: " + maxScore.ToString();
         
         canvasMain.SetActive(false);
         canvasLose.SetActive(true);

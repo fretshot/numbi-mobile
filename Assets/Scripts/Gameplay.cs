@@ -36,6 +36,10 @@ public class Gameplay : MonoBehaviour{
     public GameObject canvasMain;
     public GameObject canvasLose;
 
+    public AudioSource mainSound;
+    public AudioSource loseSound;
+    public AudioSource earnPointsSound;
+
     public static float initialSpeed = 4f;
 
     void Update() {
@@ -65,7 +69,7 @@ public class Gameplay : MonoBehaviour{
                 numbersList.Remove(1);
                 actualScore += 1;
                 textActualScore.text = actualScore.ToString();
-                //getPointsSound.Play();
+                earnPointsSound.Play();
             } else {
                 playerLost();
             }
@@ -77,7 +81,7 @@ public class Gameplay : MonoBehaviour{
                 numbersList.Remove(2);
                 actualScore += 1;
                 textActualScore.text = actualScore.ToString();
-                //getPointsSound.Play();
+                earnPointsSound.Play();
             } else {
                 playerLost();
             }
@@ -89,7 +93,7 @@ public class Gameplay : MonoBehaviour{
                 numbersList.Remove(3);
                 actualScore += 1;
                 textActualScore.text = actualScore.ToString();
-                //getPointsSound.Play();
+                earnPointsSound.Play();
             } else {
                 playerLost();
             }
@@ -101,7 +105,7 @@ public class Gameplay : MonoBehaviour{
                 numbersList.Remove(4);
                 actualScore += 1;
                 textActualScore.text = actualScore.ToString();
-                //getPointsSound.Play();
+                earnPointsSound.Play();
             } else {
                 playerLost();
             }
@@ -113,7 +117,7 @@ public class Gameplay : MonoBehaviour{
                 numbersList.Remove(5);
                 actualScore += 1;
                 textActualScore.text = actualScore.ToString();
-                //getPointsSound.Play();
+                earnPointsSound.Play();
             } else {
                 playerLost();
             }
@@ -125,7 +129,7 @@ public class Gameplay : MonoBehaviour{
                 numbersList.Remove(6);
                 actualScore += 1;
                 textActualScore.text = actualScore.ToString();
-                //getPointsSound.Play();
+                earnPointsSound.Play();
             } else {
                 playerLost();
             }
@@ -137,7 +141,7 @@ public class Gameplay : MonoBehaviour{
                 numbersList.Remove(7);
                 actualScore += 1;
                 textActualScore.text = actualScore.ToString();
-                //getPointsSound.Play();
+                earnPointsSound.Play();
             } else {
                 playerLost();
             }
@@ -149,7 +153,7 @@ public class Gameplay : MonoBehaviour{
                 numbersList.Remove(8);
                 actualScore += 1;
                 textActualScore.text = actualScore.ToString();
-                //getPointsSound.Play();
+                earnPointsSound.Play();
             } else {
                 playerLost();
             }
@@ -161,7 +165,7 @@ public class Gameplay : MonoBehaviour{
                 numbersList.Remove(9);
                 actualScore += 1;
                 textActualScore.text = actualScore.ToString();
-                //getPointsSound.Play();
+                earnPointsSound.Play();
             } else {
                 playerLost();
             }
@@ -188,16 +192,18 @@ public class Gameplay : MonoBehaviour{
     }
 
     public void playerLost() {
+
         cleanScreen();
         numbersList.Clear();
 
-        
+        mainSound.Stop();
+        loseSound.Play();
 
         foreach (NumberGenerator i in numberGenerator) {
             i.stopNumberGenerator();
         }
 
-        if (actualScore >= maxScore) {
+        if (actualScore > maxScore) {
             PlayerPrefs.SetInt("maxScore",actualScore);
             txtYourScore.GetComponent<Animator>().enabled = true;
         } else {
@@ -228,7 +234,6 @@ public class Gameplay : MonoBehaviour{
 
     public static void increaseSpeed() {
         initialSpeed += 0.01f * Time.deltaTime;
-        Debug.Log(initialSpeed);
     }
 
 }

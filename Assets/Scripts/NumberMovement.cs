@@ -8,7 +8,7 @@ public class NumberMovement : MonoBehaviour{
 
     void Update() {
         transform.Translate(Vector2.down * speed * Time.deltaTime);
-        //Debug.Log(speed);
+        
     }
 
 }

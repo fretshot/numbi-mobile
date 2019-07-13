@@ -36,6 +36,11 @@ public class Gameplay : MonoBehaviour{
     public GameObject canvasMain;
     public GameObject canvasLose;
 
+    public static float initialSpeed = 4f;
+
+    void Update() {
+        increaseSpeed();    
+    }
 
     void Start(){
 
@@ -168,6 +173,7 @@ public class Gameplay : MonoBehaviour{
 
         buttonPlayAgain.onClick.AddListener(delegate {
             SceneManager.LoadScene("01");
+            initialSpeed = 4f;
         });
 
         buttonMainMenu.onClick.AddListener(delegate {
@@ -185,12 +191,17 @@ public class Gameplay : MonoBehaviour{
         cleanScreen();
         numbersList.Clear();
 
+        
+
         foreach (NumberGenerator i in numberGenerator) {
             i.stopNumberGenerator();
         }
 
         if (actualScore >= maxScore) {
             PlayerPrefs.SetInt("maxScore",actualScore);
+            txtYourScore.GetComponent<Animator>().enabled = true;
+        } else {
+            txtYourScore.GetComponent<Animator>().enabled = false;
         }
 
         txtYourScore.text = "Your Score: "+actualScore.ToString();
@@ -215,5 +226,9 @@ public class Gameplay : MonoBehaviour{
         }
     }
 
+    public static void increaseSpeed() {
+        initialSpeed += 0.01f * Time.deltaTime;
+        Debug.Log(initialSpeed);
+    }
 
 }

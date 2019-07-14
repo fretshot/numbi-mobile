@@ -64,6 +64,7 @@ public class Gameplay : MonoBehaviour{
         if (PlayerPrefs.HasKey("maxScore")) {
             maxScore = PlayerPrefs.GetInt("maxScore");
         }
+    
 
         numbersList = new List<int>();
 

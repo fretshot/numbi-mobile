@@ -51,10 +51,14 @@ public class Gameplay : MonoBehaviour{
         canvasMain.SetActive(true);
         canvasLose.SetActive(false);
 
-        if (PlayerPrefs.HasKey("MusicVolume")) {
-            //sourceMusic.volume = PlayerPrefs.GetFloat("MusicVolume");
+        if (PlayerPrefs.HasKey("MusicVolume") || PlayerPrefs.HasKey("SoundFXVolume")) {
+            mainSound.volume = PlayerPrefs.GetFloat("MusicVolume");
+            loseSound.volume = PlayerPrefs.GetFloat("SoundFXVolume");
+            earnPointsSound.volume = PlayerPrefs.GetFloat("SoundFXVolume");
         } else {
-            //sourceMusic.volume = 1f;
+            mainSound.volume = 1f;
+            loseSound.volume = 1f;
+            earnPointsSound.volume = 1f;
         }
 
         if (PlayerPrefs.HasKey("maxScore")) {
